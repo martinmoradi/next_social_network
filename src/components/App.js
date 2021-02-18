@@ -34,7 +34,7 @@ const App = () => {
             <Route path={"/register"}>
               <Register />
             </Route>
-            <Route path={"/profile"}>
+            <Route path={"/users/me"}>
               <Profile />
             </Route>
           </Switch>

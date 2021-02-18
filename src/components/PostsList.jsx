@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getPosts, deletePost } from "../actions/postActions";
+import moment from "moment";
 
 const PostsList = ({ posts, getPosts, deletePost, auth }) => {
   useEffect(() => {
@@ -12,18 +13,18 @@ const PostsList = ({ posts, getPosts, deletePost, auth }) => {
   };
 
   const { isAuthenticated, user } = auth;
-  
+
   const renderList = () => {
     return posts.posts.map((post) => {
       return (
         <div
-          className="bg-white border shadow-sm px-4 py-3 rounded-lg max-w-lg mx-auto mt-4"
+          className="bg-white relative border shadow-sm px-4 py-3 rounded-lg max-w-lg mx-auto mt-4"
           key={post.id}
         >
           <div className="flex items-center">
             {isAuthenticated && user.id === post.user.id ? (
               <button
-                className="px-2 text-xs py-1 bg-red-400 rounded-xl text-white shadow-md"
+                className="px-2 text-xs py-1 bg-red-400 rounded-xl text-white shadow-md absolute top-2 right-2"
                 onClick={onDeleteClick.bind(this, post.id)}
               >
                 Delete
@@ -33,10 +34,15 @@ const PostsList = ({ posts, getPosts, deletePost, auth }) => {
             )}
             <div className="ml-2">
               <div className="text-sm ">
-                <span className="font-semibold">{post.id}</span>
+                <span className="font-semibold text-lg -ml-10">
+                  {post.user.username[0].toUpperCase() +
+                    post.user.username.substring(1)}
+                </span>
               </div>
               <div className="text-gray-500 text-xs flex">
-                <span className="inline-block">3d </span>
+                <span className="inline-block">
+                  {moment(post.created_at).startOf().fromNow()}
+                </span>
               </div>
             </div>
           </div>

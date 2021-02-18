@@ -22,6 +22,16 @@ export const getPosts = () => async (dispatch) => {
     );
 };
 
+export const getUserPosts = (userId) => async (dispatch) => {
+  dispatch(setPostsLoading());
+  axios.get(`http://localhost:1337/posts?user.id=${userId}`).then((res) =>
+    dispatch({
+      type: GET_POSTS,
+      payload: res.data,
+    })
+  );
+};
+
 export const deletePost = (id) => async (dispatch, getState) => {
   console.log(id);
   const config = tokenConfig(getState, "DELETE");

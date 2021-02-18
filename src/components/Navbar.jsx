@@ -8,7 +8,7 @@ const Navbar = ({ auth, logout }) => {
     e.preventDefault();
     logout();
   };
-  
+
   const { isAuthenticated } = auth;
 
   const authLinks = (
@@ -20,7 +20,7 @@ const Navbar = ({ auth, logout }) => {
         Logout
       </button>
       <li className="text-lg ml-2">
-        <Link to={"/profile"}>My Profile</Link>
+        <Link to={"/users/me"}>My Profile</Link>
       </li>
     </ul>
   );
