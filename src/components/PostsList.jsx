@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getPosts, deletePost } from "../actions/postActions";
 import moment from "moment";
 
@@ -35,8 +36,14 @@ const PostsList = ({ posts, getPosts, deletePost, auth }) => {
             <div className="ml-2">
               <div className="text-sm ">
                 <span className="font-semibold text-lg -ml-10">
-                  {post.user.username[0].toUpperCase() +
-                    post.user.username.substring(1)}
+                  {isAuthenticated ? (
+                    <Link to={`/user/${post.user.id}`}>
+                      {post.user.username[0].toUpperCase() +
+                        post.user.username.substring(1)}
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                 </span>
               </div>
               <div className="text-gray-500 text-xs flex">

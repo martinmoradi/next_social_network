@@ -20,7 +20,7 @@ const Navbar = ({ auth, logout }) => {
         Logout
       </button>
       <li className="text-lg ml-2">
-        <Link to={"/users/me"}>My Profile</Link>
+        <Link to={"/profile"}>My Profile</Link>
       </li>
     </ul>
   );

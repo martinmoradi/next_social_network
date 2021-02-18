@@ -12,6 +12,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
+import GuestProfile from "../pages/GuestProfile";
 
 const App = () => {
   // load user after refresh
@@ -34,8 +35,11 @@ const App = () => {
             <Route path={"/register"}>
               <Register />
             </Route>
-            <Route path={"/users/me"}>
+            <Route path={"/profile"} exact>
               <Profile />
+            </Route>
+            <Route path={"/user/:userSlug"}>
+              <GuestProfile />
             </Route>
           </Switch>
         </div>
