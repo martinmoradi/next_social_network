@@ -11,10 +11,8 @@ const PostsList = ({ posts, getPosts, deletePost, auth }) => {
     deletePost(id);
   };
 
-  const isAuthor = (post) => {
-    return auth.user.id === post.user.id ? true : false;
-  };
-
+  const { isAuthenticated, user } = auth;
+  
   const renderList = () => {
     return posts.posts.map((post) => {
       return (
@@ -23,7 +21,7 @@ const PostsList = ({ posts, getPosts, deletePost, auth }) => {
           key={post.id}
         >
           <div className="flex items-center">
-            {isAuthor ? (
+            {isAuthenticated && user.id === post.user.id ? (
               <button
                 className="px-2 text-xs py-1 bg-red-400 rounded-xl text-white shadow-md"
                 onClick={onDeleteClick.bind(this, post.id)}

@@ -4,7 +4,7 @@ import { addPost } from "../actions/postActions";
 
 const PostForm = ({ addPost, auth }) => {
   const [state, setState] = useState("");
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newPost = {
@@ -12,6 +12,7 @@ const PostForm = ({ addPost, auth }) => {
       user: auth.user.id,
     };
     addPost(newPost);
+    setState("");
   };
 
   return (
