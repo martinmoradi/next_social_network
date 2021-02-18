@@ -13,10 +13,10 @@ import {
 // check token & load user
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
-  if (!tokenConfig(getState)) return;
+  if (!tokenConfig(getState, "GET")) return;
   const response = await fetch(
     "http://localhost:1337/users/me",
-    tokenConfig(getState)
+    tokenConfig(getState, "GET")
   );
   const data = await response.json();
   if (!data.error) {
@@ -35,15 +35,25 @@ export const loadUser = () => async (dispatch, getState) => {
 };
 
 // cookie token config
-export const tokenConfig = (getState) => {
+export const tokenConfig = (getState, method, body = null) => {
   const token = getState().auth.token;
-  if (token) {
+  if (token && !body) {
     return {
-      method: "get",
+      method: method,
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+    };
+  }
+  if (token && body) {
+    return {
+      method: method,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     };
   }
   return;

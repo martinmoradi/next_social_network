@@ -2,13 +2,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getPosts, deletePost } from "../actions/postActions";
 
-const PostsList = ({ posts, getPosts, deletePost }) => {
+const PostsList = ({ posts, getPosts, deletePost, auth }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
 
   const onDeleteClick = (id) => {
     deletePost(id);
+  };
+
+  const isAuthor = (post) => {
+    return auth.user.id === post.user.id ? true : false;
   };
 
   const renderList = () => {
@@ -19,12 +23,16 @@ const PostsList = ({ posts, getPosts, deletePost }) => {
           key={post.id}
         >
           <div className="flex items-center">
-            <button
-              className="px-2 text-xs py-1 bg-red-400 rounded-xl text-white shadow-md"
-              onClick={onDeleteClick.bind(this, post.id)}
-            >
-              Delete
-            </button>
+            {isAuthor ? (
+              <button
+                className="px-2 text-xs py-1 bg-red-400 rounded-xl text-white shadow-md"
+                onClick={onDeleteClick.bind(this, post.id)}
+              >
+                Delete
+              </button>
+            ) : (
+              ""
+            )}
             <div className="ml-2">
               <div className="text-sm ">
                 <span className="font-semibold">{post.id}</span>
@@ -59,6 +67,7 @@ const PostsList = ({ posts, getPosts, deletePost }) => {
 
 const mapsStateToProps = (state) => ({
   posts: state.posts,
+  auth: state.auth,
 });
 
 export default connect(mapsStateToProps, { getPosts, deletePost })(PostsList);

@@ -8,7 +8,8 @@ const Navbar = ({ auth, logout }) => {
     e.preventDefault();
     logout();
   };
-  const { isAuthenticated, user } = auth;
+  
+  const { isAuthenticated } = auth;
 
   const authLinks = (
     <ul className="flex">
@@ -34,6 +35,7 @@ const Navbar = ({ auth, logout }) => {
       </li>
     </ul>
   );
+
   return (
     <nav className="flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
       <div className="mb-2 sm:mb-0">

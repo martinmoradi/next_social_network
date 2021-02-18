@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addPost } from "../actions/postActions";
 
-const PostForm = ({ addPost }) => {
+const PostForm = ({ addPost, auth }) => {
   const [state, setState] = useState("");
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
     const newPost = {
       text: state,
-      user: 2,
+      user: auth.user.id,
     };
     addPost(newPost);
   };
@@ -67,6 +67,7 @@ const PostForm = ({ addPost }) => {
 
 const mapStateToProps = (state) => ({
   posts: state.posts,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { addPost })(PostForm);
