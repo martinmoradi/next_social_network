@@ -3,13 +3,37 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../actions/authActions";
 
-const Navbar = ({ logout }) => {
+const Navbar = ({ auth, logout }) => {
   const handleClick = (e) => {
-    console.log("logout!");
     e.preventDefault();
     logout();
   };
+  const { isAuthenticated, user } = auth;
 
+  const authLinks = (
+    <ul className="flex">
+      <button
+        className="text-lg ml-2 cursor-pointer"
+        onClick={(e) => handleClick(e)}
+      >
+        Logout
+      </button>
+      <li className="text-lg ml-2">
+        <Link to={"/profile"}>My Profile</Link>
+      </li>
+    </ul>
+  );
+
+  const guestLinks = (
+    <ul className="flex">
+      <li className="text-lg ml-2">
+        <Link to={"/register"}>Register</Link>
+      </li>
+      <li className="text-lg ml-2">
+        <Link to={"/login"}>Login</Link>
+      </li>
+    </ul>
+  );
   return (
     <nav className="flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
       <div className="mb-2 sm:mb-0">
@@ -19,26 +43,13 @@ const Navbar = ({ logout }) => {
           </Link>
         </span>
       </div>
-      <ul className="flex">
-        <li className="text-lg ml-2">
-          <Link to={"/register"}>Register</Link>
-        </li>
-        <li className="text-lg ml-2">
-          <Link to={"/login"}>Login</Link>
-        </li>
-        <a
-          className="text-lg ml-2 cursor-pointer"
-          onClick={(e) => handleClick(e)}
-          href="#"
-        >
-          <span>Logout</span>
-        </a>
-        <li className="text-lg ml-2">
-          <Link to={"/profile"}>Profile</Link>
-        </li>
-      </ul>
+      {isAuthenticated ? authLinks : guestLinks}
     </nav>
   );
 };
 
-export default connect(null, { logout })(Navbar);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);

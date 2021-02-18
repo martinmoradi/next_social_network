@@ -13,6 +13,7 @@ import {
 // check token & load user
 export const loadUser = () => async (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
+  if (!tokenConfig(getState)) return;
   const response = await fetch(
     "http://localhost:1337/users/me",
     tokenConfig(getState)
@@ -45,6 +46,7 @@ export const tokenConfig = (getState) => {
       },
     };
   }
+  return;
 };
 
 // register user
@@ -89,7 +91,6 @@ export const login = (userData) => async (dispatch) => {
     },
     body: JSON.stringify(userData),
   };
-
   const response = await fetch("http://localhost:1337/auth/local", config);
   const data = await response.json();
   if (data.user) {

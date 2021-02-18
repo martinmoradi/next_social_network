@@ -14,6 +14,7 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 
 const App = () => {
+  // load user after refresh
   useEffect(() => {
     store.dispatch(loadUser());
   }, [loadUser]);
