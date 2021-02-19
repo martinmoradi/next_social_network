@@ -6,6 +6,7 @@ import {
   GET_POSTS,
   ADD_POST,
   EDIT_POST,
+  GET_AUTHOR_INFOS,
   DELETE_POST,
   POSTS_LOADING,
 } from "./types";
@@ -32,8 +33,26 @@ export const getUserPosts = (userId) => async (dispatch) => {
   );
 };
 
+// export const getAuthorInfos = (userId) => async (dispatch) => {
+//   const config = tokenConfig(getState, "GET");
+//   const response = await fetch(`http://localhost:1337/users/${userId}`, config);
+//   const data = await response.json();
+//   console.log(data);
+//   if (data.statusCode) {
+//     dispatch(
+//       returnErrors(data.message[0].messages[0].message, data.statusCode)
+//     );
+//   } else {
+//     dispatch({
+//       type: GET_AUTHOR_INFOS,
+//       payload: data,
+//     });
+//   }
+// };
+
+export const sayHello = () => console.log("hello");
+
 export const deletePost = (id) => async (dispatch, getState) => {
-  console.log(id);
   const config = tokenConfig(getState, "DELETE");
   const response = await fetch(`http://localhost:1337/posts/${id}`, config);
   const data = await response.json();

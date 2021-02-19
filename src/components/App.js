@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "../styles/tailwind.output.css";
 
 import { Provider } from "react-redux";
@@ -13,6 +13,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import GuestProfile from "../pages/GuestProfile";
+import PrivateRoute from "../containers/PrivateRoute";
+import PublicRoute from "../containers/PublicRoute";
 
 const App = () => {
   // load user after refresh
@@ -22,28 +24,22 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <div className="app">
-        <Navbar />
-        <div className="md:container mx-auto">
-          <Switch>
-            <Route path={"/"} exact>
-              <Home />
-            </Route>
-            <Route path={"/login"}>
-              <Login />
-            </Route>
-            <Route path={"/register"}>
-              <Register />
-            </Route>
-            <Route path={"/profile"} exact>
-              <Profile />
-            </Route>
-            <Route path={"/user/:userSlug"}>
-              <GuestProfile />
-            </Route>
-          </Switch>
+      <Router>
+        <div className="app">
+          <Navbar />
+          <div className="md:container mx-auto">
+            <Switch>
+              <PublicRoute path="/login" component={Login} />
+              <PublicRoute path="/register" component={Register} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/user/:userSlug" component={GuestProfile} />
+              <Route exact path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     </Provider>
   );
 };

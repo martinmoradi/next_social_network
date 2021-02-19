@@ -3,12 +3,14 @@ import {
   ADD_POST,
   EDIT_POST,
   DELETE_POST,
+  GET_AUTHOR_INFOS,
   POSTS_LOADING,
 } from "../actions/types";
 
 const initialState = {
   posts: [],
   loading: false,
+  authorInfos: null,
 };
 
 export default function (state = initialState, action) {
@@ -33,6 +35,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+      };
+    case GET_AUTHOR_INFOS:
+      return {
+        ...state,
+        authorInfos: action.payload,
+        loading: false,
       };
     default:
       return state;

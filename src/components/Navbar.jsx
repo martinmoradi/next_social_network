@@ -40,9 +40,7 @@ const Navbar = ({ auth, logout }) => {
     <nav className="flex flex-col text-center sm:flex-row sm:text-left sm:justify-between py-4 px-6 bg-white shadow sm:items-baseline w-full">
       <div className="mb-2 sm:mb-0">
         <span className="text-3xl">
-          <Link to={"/"} exact>
-            Home
-          </Link>
+          <Link to={"/"}>Home</Link>
         </span>
       </div>
       {isAuthenticated ? authLinks : guestLinks}

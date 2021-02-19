@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 
 import {
   USER_LOADED,

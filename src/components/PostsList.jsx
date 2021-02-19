@@ -35,16 +35,16 @@ const PostsList = ({ posts, getPosts, deletePost, auth }) => {
             )}
             <div className="ml-2">
               <div className="text-sm ">
-                <span className="font-semibold text-lg -ml-10">
-                  {isAuthenticated ? (
-                    <Link to={`/user/${post.user.id}`}>
+                {isAuthenticated ? (
+                  <Link to={`/user/${post.user.id}`}>
+                    <span className="font-semibold text-lg -ml-10">
                       {post.user.username[0].toUpperCase() +
                         post.user.username.substring(1)}
-                    </Link>
-                  ) : (
-                    ""
-                  )}
-                </span>
+                    </span>
+                  </Link>
+                ) : (
+                  <span className="font-semibold text-lg">Someone said...</span>
+                )}
               </div>
               <div className="text-gray-500 text-xs flex">
                 <span className="inline-block">

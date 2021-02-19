@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { register } from "../actions/authActions";
 
-const Register = ({ register, isAuthenticated }) => {
+const Register = ({ register }) => {
   const [state, setState] = useState({ username: "", password: "", email: "" });
 
   const handleChange = (event) => {

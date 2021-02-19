@@ -23,7 +23,9 @@ const Profile = ({ posts, auth, getUserPosts, deletePost }) => {
     }
   }, [setUserName, setUserDescription]);
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   const handleCancel = () => {
     setUserName(auth.user.username);
@@ -50,7 +52,7 @@ const Profile = ({ posts, auth, getUserPosts, deletePost }) => {
             )}
             <div className="ml-2">
               <div className="text-sm ">
-                <span className="font-semibold text-lg -ml-10">
+                <span className="font-semibold text-lg">
                   {post.user.username[0].toUpperCase() +
                     post.user.username.substring(1)}
                 </span>
@@ -96,7 +98,7 @@ const Profile = ({ posts, auth, getUserPosts, deletePost }) => {
             <div className="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label
-                  for="username"
+                  htmlFor="username"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
                   Username
@@ -109,7 +111,7 @@ const Profile = ({ posts, auth, getUserPosts, deletePost }) => {
                       onChange={(event) => setUserName(event.target.value)}
                       id="username"
                       value={userName}
-                      autocomplete="username"
+                      autoComplete="username"
                       className="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                     />
                   </div>
@@ -118,7 +120,7 @@ const Profile = ({ posts, auth, getUserPosts, deletePost }) => {
 
               <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
                 <label
-                  for="about"
+                  htmlFor="about"
                   className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
                 >
                   Description
@@ -145,14 +147,14 @@ const Profile = ({ posts, auth, getUserPosts, deletePost }) => {
           <div className="flex justify-end">
             <button
               type="button"
-              onClick={handleCancel}
+              onClick={(e) => handleCancel(e)}
               className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Cancel
             </button>
             <button
               type="submit"
-              onClick={handleSubmit}
+              onClick={(e) => handleSubmit(e)}
               className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Save
